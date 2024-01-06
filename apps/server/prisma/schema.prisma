@@ -1,0 +1,56 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String               @id @default(auto()) @map("_id") @db.ObjectId
+  email       String               @unique
+  password    String
+  collections UsersOnCollections[]
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+}
+
+model Collection {
+  id        String               @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  links     Link[]
+  users     UsersOnCollections[]
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+}
+
+enum CollectionRole {
+  ADMIN
+  MEMBER
+}
+
+model UsersOnCollections {
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  role         CollectionRole
+  collection   Collection     @relation(fields: [collectionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  collectionId String         @db.ObjectId
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId       String         @db.ObjectId
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model Link {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  collectionId String     @db.ObjectId
+  url          String
+  readerInfo   Json
+  title        String
+  description  String?
+  faviconUrl   String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}

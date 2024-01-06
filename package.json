@@ -1,0 +1,45 @@
+{
+  "name": "turborepo-basic-shared",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "extension:build": "yarn workspace extension build",
+    "server:deploy": "yarn workspace server deploy",
+    "prisma:format": "yarn workspace server prisma:format",
+    "prisma:seed": "yarn workspace server prisma:seed",
+    "prisma:generate": "yarn workspace server prisma:generate",
+    "prisma:db:push": "yarn workspace server prisma:db:push",
+    "prisma:update": "yarn workspace server prisma:update"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "turbo": "latest"
+  },
+  "turbo": {
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ]
+      },
+      "lint": {
+        "outputs": []
+      },
+      "dev": {
+        "cache": false
+      }
+    }
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
+  }
+}

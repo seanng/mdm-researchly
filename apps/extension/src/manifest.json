@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "version": "0.0.0.2",
+  "key": "omhabljpdjjboigejhophhfejlhghgpl",
+  "description": "Share links and articles with your team members.",
+  "name": "Researchly.US",
+  "options_page": "options.html",
+  "background": { "service_worker": "background.bundle.js" },
+  "host_permissions": [
+    "http://localhost:3001/*",
+    "https://readly.vercel.app/*"
+  ],
+  "permissions": ["storage", "cookies", "tabs"],
+  "action": {
+    "default_popup": "popup_unauth.html",
+    "default_icon": "logo-48.png"
+  },
+  "icons": {
+    "16": "logo-16.png",
+    "48": "logo-48.png",
+    "128": "logo-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*", "<all_urls>"],
+      "js": ["contentScript.bundle.js"],
+      "css": ["content.styles.css"]
+    }
+  ],
+  "externally_connectable": {
+    "matches": ["http://localhost:3001/*", "https://readly.vercel.app/*"]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content.styles.css",
+        "logo-16.png",
+        "logo-48.png",
+        "logo-128.png"
+      ],
+      "matches": []
+    }
+  ]
+}
