@@ -23,21 +23,6 @@
     "prettier": "^2.5.1",
     "turbo": "1.9.7"
   },
-  "turbo": {
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "dev": {
-        "cache": false
-      }
-    }
-  },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
