@@ -1,14 +1,15 @@
 {
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnl3+81L7lK0w9nTd8yshHzrt+wOFAcLpnJoZ7XiDhG1SxpHinWzUjmPAUcsPESQ3DyPofALZp5g/M1QKPf3HFWTyjlXhuE0mLxSBqGPDKFRvMepro8kNtpk5+GRVaHq/iT7O4QEpsJwOHPvJ0GqzTn7hS3V5wgIrH20adeplFisopbQJ/zufu+jNQ75y7rsotfOFkYzXuje4YcxkXg9k3iNGFS9TwP4JFpreaMKJ392AsvPP9SQxzBk2Rt3zZY0bbGIowm1Ebf4V7U8ceMrSAKC4fj243Mm/b9GjaaSUE1UghUHaalZarAvhe8G6vIgU73nhKpfkj39D+x6Lv86bGQIDAQAB",
   "manifest_version": 3,
-  "version": "0.0.0.2",
-  "key": "omhabljpdjjboigejhophhfejlhghgpl",
+  "version": "0.0.0.3",
   "description": "Share links and articles with your team members.",
   "name": "Researchly.US",
   "options_page": "options.html",
   "background": { "service_worker": "background.bundle.js" },
   "host_permissions": [
     "http://localhost:3001/*",
-    "https://readly.vercel.app/*"
+    "https://readly.vercel.app/*",
+    "https://mdm-researchly-web.vercel.app/*"
   ],
   "permissions": ["storage", "cookies", "tabs"],
   "action": {
@@ -28,7 +29,11 @@
     }
   ],
   "externally_connectable": {
-    "matches": ["http://localhost:3001/*", "https://readly.vercel.app/*"]
+    "matches": [
+      "http://localhost:3001/*",
+      "https://readly.vercel.app/*",
+      "https://mdm-researchly-web.vercel.app/*"
+    ]
   },
   "web_accessible_resources": [
     {

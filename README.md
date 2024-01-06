@@ -25,9 +25,8 @@ I have git-included `app/extensions/secrets.development.js`, `app/web/.env.local
    2. Check `Developer mode`
    3. Click on `Load unpacked extension`
    4. Select the `apps/extension/build` folder.
-4. Copy the extension's ID as shown in `chrome://extensions` and paste it inside `apps/web/.env.local`, replacing <YOUR_EXTENSION_ID>.
-5. Run `yarn dev` to simultaneously start the server, extension and website.
-6. Pin the Researchly Extension for easy access.
+4. Run `yarn dev` to concurrently start the server, extension and website.
+5. Pin the Researchly Extension for easy access.
 
 ## Tech Stack
 
