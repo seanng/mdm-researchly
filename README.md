@@ -78,4 +78,5 @@ Alternatively, if you wish to run the extension locally, please follow the instr
    3. Click on `Load unpacked extension`
    4. Select the `apps/extension/build` folder.
 4. Run `yarn dev` to concurrently start the server, extension and website.
-5. Pin the Researchly Extension for easy access.
+5. Once all the applications are up and running, you may start using the extension.
+6. Pin the Researchly Extension for easy access.
