@@ -3,6 +3,7 @@ import { Socket } from 'socket.io-client';
 import { fetchMyData, updateCache } from 'utils/helpers';
 import { Collection, CreateLinkPayload, Link, Store } from 'utils/types';
 
+// Events fired from the Popup are handled in this listener.
 export function popupEventsListener(
   req: any,
   port: chrome.runtime.Port,

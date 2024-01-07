@@ -43,6 +43,10 @@ export class CollectionsController {
     return collection;
   }
 
+  /**
+   * Update the database and broadcast the "update" event to users in the Collection.
+   * This way, connected users can see the Collection updating in real time.
+   */
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
@@ -71,6 +75,10 @@ export class CollectionsController {
     return { collection, userId };
   }
 
+  /**
+   * Delete the Collection from the database and broadcast the "delete" event to connected users.
+   * This way, connected users can see the Collection disappear in real time.
+   */
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(@Request() req, @Param() params: IDParams) {

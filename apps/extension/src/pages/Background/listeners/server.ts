@@ -2,6 +2,7 @@ import { Socket } from 'socket.io-client';
 import { updateCache } from 'utils/helpers';
 import { Collection, Link, Store } from 'utils/types';
 
+// Socket events fired from the server are handled in this listener.
 export function serverEventsListener(
   socket: Socket,
   port: chrome.runtime.Port
@@ -50,7 +51,6 @@ export async function receiveCollectionJoin(
   const idx = collections.findIndex(
     (c: Collection) => c.id === data.collectionId
   );
-  console.log('collection join received.');
   if (idx === -1) return; // if user already left collection (but still connected to socket)
   collections[idx].participants.push(data.user);
   updateCache({ collections });

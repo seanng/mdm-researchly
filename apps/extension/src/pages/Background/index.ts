@@ -1,3 +1,7 @@
+/**
+ * The background script is the extension's event handler; it contains listeners for browser events related to the extension.
+ */
+
 import { io, Socket } from 'socket.io-client';
 import secrets from 'secrets';
 import { getStorageItems } from 'utils/helpers';
@@ -7,31 +11,36 @@ import { externalEventsListener } from './listeners/external';
 
 let token: string;
 
+/**
+ * These are the event listeners
+ */
 chrome.runtime.onInstalled.addListener(handleExtensionStartup);
 chrome.runtime.onStartup.addListener(handleExtensionStartup);
 chrome.runtime.onMessageExternal.addListener((_, __, ___) =>
-  externalEventsListener(_, __, ___, onUserAuth)
+  externalEventsListener(_, __, ___, handleUserAuth)
 );
 chrome.runtime.onMessage.addListener((_, __, ___) =>
-  externalEventsListener(_, __, ___, onUserAuth)
+  externalEventsListener(_, __, ___, handleUserAuth)
 );
 chrome.runtime.onConnect.addListener(handlePopupOpen);
 chrome.runtime.onSuspend.addListener(() => {
   console.log('onSuspend heard.');
 });
 
-async function onUserAuth(sendResponse: () => void) {
+/**
+ * Connectivity related handler functions
+ */
+
+async function handleUserAuth(sendResponse: () => void) {
   const storageItems = await getStorageItems();
   token = storageItems?.token;
   sendResponse();
 }
 
+// Sets the popup UI depending on whether or not the user is authenticated.
 async function handleExtensionStartup() {
-  console.log('extension starting up.222');
   const storageItems = await getStorageItems();
-  console.log('storageItems: ', storageItems);
   token = storageItems?.token;
-  console.log('token: ', token);
   chrome.action.setPopup({
     popup: storageItems?.token ? 'popup_dashboard.html' : 'popup_unauth.html',
   });

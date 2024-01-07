@@ -22,6 +22,10 @@ export class LinksController {
     private socketsService: SocketsService,
   ) {}
 
+  /**
+   * Create the link in the db and broadcast the "create" event to its collection.
+   * This way, connected users can see the new link in real time.
+   */
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Request() req, @Body() createLinkDto: CreateLinkDto) {
@@ -47,6 +51,10 @@ export class LinksController {
     return this.linksService.findOne(+id);
   }
 
+  /**
+   * Update the database and broadcast the "update" event to its collection.
+   * This way, connected users can see the link updating in real time.
+   */
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
@@ -63,6 +71,10 @@ export class LinksController {
     return link;
   }
 
+  /**
+   * Delete the link from the database and broadcast the "delete" event to its collection.
+   * This way, connected users can see the link disappear in real time.
+   */
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Request() req, @Param('id') id: string) {

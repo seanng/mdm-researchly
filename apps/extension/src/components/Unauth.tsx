@@ -2,6 +2,10 @@ import React, { SyntheticEvent } from 'react';
 import { Logo, PrimaryButtonWide, WhiteButtonWide } from 'ui';
 import secrets from 'secrets';
 
+/**
+ * This is the default popup component.
+ * It is displayed when the user is not logged in.
+ */
 export const Unauth: React.FC = () => {
   const goTo = (url: string) => (e: SyntheticEvent) => {
     e.preventDefault();

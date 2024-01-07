@@ -72,7 +72,6 @@ export const debounce = (func: (...a: any[]) => void, wait: number) => {
 
   return function executedFunction(...args: any[]) {
     const later = () => {
-      console.log('executing now.');
       clearTimeout(timeout);
       func(...args);
     };

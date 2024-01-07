@@ -29,6 +29,10 @@ const texts = {
   },
 };
 
+/**
+ * This is the main component, used by the Login and Signup screens.
+ * It uses the react-hook-form library for form validation and submission.
+ */
 export function AuthForm({ type = LOGIN, token }) {
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
   const router = useRouter();
@@ -54,6 +58,9 @@ export function AuthForm({ type = LOGIN, token }) {
     resolve(null);
   };
 
+  /**
+   * When the form is submitted, we make a POST request to the backend and transmit a message to the popup extension.
+   */
   const onSubmit = async (input: {
     email: string;
     password: string;

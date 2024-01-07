@@ -26,10 +26,6 @@ export function AddLinkPopover() {
       { message: 'PAGE_DESCRIPTION' },
       (desc) => {}
     );
-
-    // console.log('desc: ', desc);
-    // get url og info
-    // save url and og info to db.
   }
   return (
     <Popover className="relative">

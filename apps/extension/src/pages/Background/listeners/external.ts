@@ -1,6 +1,7 @@
 import secrets from 'secrets';
-import { fetchMyData, getStorageItems, updateCache } from 'utils/helpers';
+import { fetchMyData, updateCache } from 'utils/helpers';
 
+// Events fired from the Web are handled in this listener.
 export function externalEventsListener(
   req: any,
   _: any,
@@ -32,7 +33,6 @@ export async function authenticateUser(
   { token }: { token: string },
   cb: () => Promise<void>
 ) {
-  console.log('i heard you.');
   await chrome.storage.local.set({ token });
   const myDeets = await fetchMyData();
   await updateCache(myDeets);

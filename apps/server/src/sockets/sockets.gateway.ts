@@ -17,6 +17,10 @@ import { CreateCollectionDto } from 'src/collections/dto/create-collection.dto';
 import { LinksService } from 'src/links/links.service';
 import { UpdateLinkDto } from 'src/links/dto/update-link.dto';
 
+/**
+ * Events are emitted to rooms (labelled as the collectionId) rather than individual clients.
+ * This allows events to be broadcasted to all users in a collection.
+ */
 @WebSocketGateway({
   cors: {
     origin: '*',
@@ -35,6 +39,7 @@ export class SocketsGateway
 
   private logger: Logger = new Logger('SocketsGateway');
 
+  // Lifecycle hook that runs after the gateway has been initialized.
   afterInit(server: Server) {
     this.socketsService.socket = server;
   }
@@ -43,6 +48,9 @@ export class SocketsGateway
     this.logger.log(`Client disconnected: ${client.id}`);
   }
 
+  /**
+   * Subscribe the connected client to all events broadcasted to the collections they are in.
+   */
   async handleConnection(@ConnectedSocket() client: Socket) {
     try {
       const user = await this.authService.getUserFromAuthToken(
@@ -58,6 +66,10 @@ export class SocketsGateway
     }
   }
 
+  /**
+   * Handler for the "Collection Creation" message passed by the extension.
+   * Subscribes the client to future events emitted by users in the newly created collection.
+   */
   @SubscribeMessage('B_COLLECTION_CREATE')
   async onCollectionCreate(
     @ConnectedSocket() client: Socket,
@@ -69,6 +81,10 @@ export class SocketsGateway
     client.emit('S_COLLECTION_CREATED', collection);
   }
 
+  /**
+   * Handler for the "Link Update" message emitted by the updater's extension.
+   * Broadcasts this message to all connected users in the collection, with the updated info.
+   */
   @SubscribeMessage('B_LINK_UPDATE')
   async onLinkUpdate(
     @ConnectedSocket() client: Socket,
@@ -81,6 +97,10 @@ export class SocketsGateway
     });
   }
 
+  /**
+   * Handler for the "Link Delete" message emitted by the updater's extension.
+   * Broadcasts this message to all connected users in the collection, with the updated info.
+   */
   @SubscribeMessage('B_LINK_DELETE')
   async onLinkDelete(
     @ConnectedSocket() client: Socket,
