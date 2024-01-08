@@ -1,10 +1,12 @@
 # Researchly (MDM Work Sample)
 
-Researchly is a Chrome Extension for users to bookmark websites in shared folders. This repository contains the 3 applications required to run the extension:
+[Researchly](https://chromewebstore.google.com/detail/researchlyus/omhabljpdjjboigejhophhfejlhghgpl?hl=en) is a Chrome Extension for users to bookmark websites in shared folders. This repository contains the 3 applications required to run the extension:
 
 - Chrome Extension
 - Server
 - Web
+
+[I've recorded a short video here to demo the extension](https://www.loom.com/share/dee713f717ea452594a99e99d0457782?sid=a0b144c7-3b54-4fc8-864b-ca377dad5304)
 
 ## Orienting the code
 
